@@ -1,0 +1,48 @@
+<kendo-grid [data]="view" [sortable]="true" [sort]="sort" [pageable]="false" [navigable]="true">
+	<kendo-grid-column field="nfc_tag_id" title="" width="75">
+		<ng-template kendoGridCellTemplate let-dataItem>
+			<span
+            class="k-icon k-i-rss"
+            [ngStyle]="{ color: dataItem.nfc_tag_id ? 'blue' : 'black' }"
+          ></span>
+		</ng-template>
+	</kendo-grid-column>
+	<kendo-grid-column field="qr_code" title="" width="75">
+		<ng-template kendoGridCellTemplate let-dataItem>
+			<span
+            class="k-icon k-i-qr-code"
+            [ngStyle]="{ color: dataItem.qr_code ? 'blue' : 'black' }"
+          ></span>
+		</ng-template>
+	</kendo-grid-column>
+	<kendo-grid-column field="title" title="Bezeichnung"></kendo-grid-column>
+	<kendo-grid-column field="qr_code" title="" width="75">
+		<ng-template kendoGridCellTemplate let-dataItem>
+			<span
+            class="k-icon k-i-eye"
+            [ngStyle]="{ color: getEyeColor(dataItem) }"
+          ></span>
+		</ng-template>
+	</kendo-grid-column>
+	<kendo-grid-column field="id_number" title="ID"></kendo-grid-column>
+	<kendo-grid-column field="id" title="DB-ID"></kendo-grid-column>
+	<kendo-grid-column field="articel_no" title="Artikelnummer"></kendo-grid-column>
+	<kendo-grid-column field="customer_description" title="Kundenbezeichnung"></kendo-grid-column>
+	<kendo-grid-column field="last_protocol.protocol_date" title="Letzte Prüfung">
+		<ng-template kendoGridCellTemplate let-dataItem>
+			<span *ngIf="dataItem?.last_protocol?.protocol_date">
+				{{ dataItem.last_protocol.protocol_date | date: 'dd.MM.yyyy' }}</span>
+		</ng-template>
+	</kendo-grid-column>
+	<kendo-grid-column field="last_protocol.protocol_date_next" title="Nächste Prüfung">
+		<ng-template kendoGridCellTemplate let-dataItem>
+			<span *ngIf="dataItem?.last_protocol?.protocol_date_next" [ngStyle]="{ color: getEyeColor(dataItem) }">
+				{{ getNextText(dataItem) }}</span>
+		</ng-template>
+	</kendo-grid-column>
+	<kendo-grid-column field="check_interval" title="Intervall prüfen"></kendo-grid-column>
+	<ng-template kendoGridDetailTemplate let-dataItem [kendoGridDetailTemplateShowIf]="showOnlyBeveragesDetails">
+		<category-details [category]="dataItem">
+		</category-details>
+	</ng-template>
+</kendo-grid>

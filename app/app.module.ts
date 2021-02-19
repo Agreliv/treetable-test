@@ -8,6 +8,7 @@ import { GridModule } from '@progress/kendo-angular-grid';
 import { AppComponent } from './app.component';
 
 import { CategoryDetailComponent } from './category-details.component';
+import { ListDetailViewComponent } from './list-detail-view/listDetailView.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { CategoryDetailComponent } from './category-details.component';
   ],
   declarations: [
     AppComponent,
-    CategoryDetailComponent
+    CategoryDetailComponent,
+    ListDetailViewComponent
   ],
   bootstrap: [
     AppComponent

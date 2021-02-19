@@ -45,11 +45,11 @@ export class CategoryDetailComponent implements OnInit {
         this.view = this.service;
 
         /*load products for the given category*/
-        this.service.queryForCategory(this.category, { skip: this.skip, take: 5 });
+        //this.service.queryForCategory(this.category, { skip: this.skip, take: 5 });
     }
 
     public pageChange({ skip, take }: PageChangeEvent): void {
         this.skip = skip;
-        this.service.queryForCategory(this.category, { skip, take });
+        //this.service.queryForCategory(this.category, { skip, take });
     }
 }

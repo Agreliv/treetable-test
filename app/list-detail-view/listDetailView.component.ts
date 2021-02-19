@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit } from "@angular/core";
+import { Component, ViewChild, OnInit, Input } from "@angular/core";
 import { Observable } from "rxjs";
 
 import {
@@ -9,18 +9,22 @@ import {
 
 import { SortDescriptor } from "@progress/kendo-data-query";
 
-import { CategoriesService } from "./northwind.service";
+import { CategoriesService } from "./../northwind.service";
 
 @Component({
   providers: [CategoriesService],
-  selector: "my-app",
-  templateUrl: "app.component.html"
+  selector: "list-detail-view-app",
+  templateUrl: "listDetailView.Component.html"
 })
-export class AppComponent implements OnInit {
-  public view: Observable<GridDataResult>;
+export class ListDetailViewComponent implements OnInit {
   public sort: Array<SortDescriptor> = [];
   public pageSize = 10;
   public skip = 0;
+
+  /**
+     * The category for which details are displayed
+     */
+    @Input() public view: any;
 
   // For Angular 8
   // @ViewChild(GridComponent, { static: true })
@@ -31,32 +35,8 @@ export class AppComponent implements OnInit {
   constructor(private service: CategoriesService) {}
 
   public ngOnInit(): void {
-    // Bind directly to the service as it is a Subject
-    this.view = this.service;
-
     // Fetch the data with the initial state
-    this.loadData();
-  }
-
-  public dataStateChange({ skip, take, sort }: DataStateChangeEvent): void {
-    // Save the current state of the Grid component
-    this.skip = skip;
-    this.pageSize = take;
-    this.sort = sort;
-
-    // Reload the data with the new state
-    this.loadData();
-
-    // Expand the first row initially
-    this.grid.expandRow(0);
-  }
-
-  private loadData(): void {
-    this.service.query({
-      skip: this.skip,
-      take: this.pageSize,
-      sort: this.sort
-    });
+    console.log(this.view);
   }
 
   public getEyeColor(data): string {

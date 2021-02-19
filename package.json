@@ -31,7 +31,9 @@
     "@progress/kendo-angular-excel-export": "4.0.0",
     "@progress/kendo-angular-label": "3.0.1",
     "@progress/kendo-angular-pdf-export": "3.0.0",
-    "@progress/kendo-data-query": "1.5.4"
+    "@progress/kendo-data-query": "1.5.4",
+    "@fortawesome/angular-fontawesome": "^0.6.1",
+    "@fortawesome/fontawesome-svg-core": "^1.2.28"
   },
   "scripts": {
     "ng": "ng",
