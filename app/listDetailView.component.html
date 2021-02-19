@@ -1,4 +1,5 @@
-<kendo-grid [data]="view" [sortable]="true" [sort]="sort" [pageable]="false" [navigable]="true">
+<kendo-grid [data]="view" [sortable]="true" [sort]="sort" [pageable]="false" [navigable]="true"
+	(sortChange)="sortChange($event)">
 	<kendo-grid-column field="nfc_tag_id" title="" width="75">
 		<ng-template kendoGridCellTemplate let-dataItem>
 			<span
@@ -40,7 +41,39 @@
 				{{ getNextText(dataItem) }}</span>
 		</ng-template>
 	</kendo-grid-column>
-	<kendo-grid-column field="check_interval" title="Intervall prüfen"></kendo-grid-column>
+	<kendo-grid-column field="Standort" title="Standort"></kendo-grid-column>
+	<kendo-grid-column field="Auflagepunkte" title="Auflagepunkte"></kendo-grid-column>
+	<kendo-grid-column field="Hakenhersteller" title="Hakenhersteller"></kendo-grid-column>
+	<kendo-grid-column field="Hersteller (Freitext)" title="Hersteller (Freitext)"></kendo-grid-column>
+	<kendo-grid-column field="Verbindung" title="Verbindung"></kendo-grid-column>
+	<kendo-grid-column field="Stränge" title="Stränge"></kendo-grid-column>
+	<kendo-grid-column field="Ketten Grad" title="Ketten Grad"></kendo-grid-column>
+	<kendo-grid-column field="Grössen/ø in mm" title="Grössen/ø in mm"></kendo-grid-column>
+	<kendo-grid-column field="Nutzlänge NL in mm" title="Nutzlänge NL in mm"></kendo-grid-column>
+	<kendo-grid-column field="WLL in t (0-45°)" title="WLL in t (0-45°)"></kendo-grid-column>
+	<kendo-grid-column field="Andere Auflagepunkte" title="Andere Auflagepunkte"></kendo-grid-column>
+	<kendo-grid-column field="Auftragsnr. (Bestellung)" title="Auftragsnr. (Bestellung)"></kendo-grid-column>
+	<kendo-grid-column field="Auftragsnr. (Reparatur)" title="Auftragsnr. (Reparatur)"></kendo-grid-column>
+	<kendo-grid-column field="_basic_info_" title="_basic_info_"></kendo-grid-column>
+	<kendo-grid-column field="_basic_info_show_" title="_basic_info_show_"></kendo-grid-column>
+	<kendo-grid-column field="author" title="author"></kendo-grid-column>
+	<kendo-grid-column field="protocol_template" title="protocol_template"></kendo-grid-column>
+	<kendo-grid-column field="Ansprechpartner" title="Ansprechpartner"></kendo-grid-column>
+	<kendo-grid-column field="Working Load Limit (0-45°)" title="Working Load Limit (0-45°)"></kendo-grid-column>
+	<kendo-grid-column field="Test Code" title="Test Code"></kendo-grid-column>
+	<kendo-grid-column field="App Connect" title="App Connect"></kendo-grid-column>
+	<kendo-grid-column field="Spezialhebemittel" title="Spezialhebemittel"></kendo-grid-column>
+	<kendo-grid-column field="Seriennummer" title="Seriennummer"></kendo-grid-column>
+	<kendo-grid-column field="Eigengewicht (in kg)" title="Eigengewicht (in kg)"></kendo-grid-column>
+	<kendo-grid-column field="BMU Safe Working Load (SWL in N)" title="BMU Safe Working Load (SWL in N)">
+	</kendo-grid-column>
+	<kendo-grid-column field="Gesamthöhe / Gesamtlänge (m)" title="Gesamthöhe / Gesamtlänge (m)"></kendo-grid-column>
+	<kendo-grid-column field="Länge Fixteil" title="Länge Fixteil"></kendo-grid-column>
+	<kendo-grid-column field="Working Length" title="Working Length"></kendo-grid-column>
+	<kendo-grid-column field="Diameter" title="Diameter"></kendo-grid-column>
+	<kendo-grid-column field="Working Load Limit (0-45°)" title="Working Load Limit (0-45°)"></kendo-grid-column>
+	<kendo-grid-column field="No. of strands" title="No. of strands"></kendo-grid-column>
+	<kendo-grid-column field="Test Code" title="Test Code"></kendo-grid-column>
 	<ng-template kendoGridDetailTemplate let-dataItem [kendoGridDetailTemplateShowIf]="showOnlyBeveragesDetails">
 		<list-detail-view-app [parent]="dataItem">
 		</list-detail-view-app>

@@ -1,13 +1,15 @@
 import { Component, ViewChild, OnInit, Input } from "@angular/core";
 import { Observable } from "rxjs";
 
+import { SortDescriptor, orderBy } from "@progress/kendo-data-query";
+
 import {
   GridComponent,
   GridDataResult,
   DataStateChangeEvent
 } from "@progress/kendo-angular-grid";
 
-import { SortDescriptor } from "@progress/kendo-data-query";
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 import { CategoriesService } from "./northwind.service";
 
@@ -33,12 +35,25 @@ export class ListDetailViewComponent implements OnInit {
 
   @ViewChild(GridComponent) grid: GridComponent;
 
-  constructor(private service: CategoriesService) {}
+  constructor(private service: CategoriesService,private formBuilder: FormBuilder) {}  
 
   public ngOnInit(): void {
     // Fetch the data with the initial state
     this.view = {data:this.parent.children, total:this.parent.children.length}
     console.log(this.parent);
+  }
+
+    public sortChange(sort: SortDescriptor[]): void {
+    this.sort = sort;
+    this.loadProducts();
+  }
+
+  private loadProducts(): void {
+    console.log('load products with sort:'+this.sort);
+    this.view = {
+      data: orderBy(this.parent.children, this.sort),
+      total: this.parent.children.length
+    };
   }
 
   public getEyeColor(data): string {

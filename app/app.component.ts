@@ -7,9 +7,10 @@ import {
   DataStateChangeEvent
 } from "@progress/kendo-angular-grid";
 
-import { SortDescriptor } from "@progress/kendo-data-query";
+import { SortDescriptor, orderBy } from "@progress/kendo-data-query";
 
 import { CategoriesService } from "./northwind.service";
+import Data from "./data.json";
 
 @Component({
   providers: [CategoriesService],
@@ -17,7 +18,7 @@ import { CategoriesService } from "./northwind.service";
   templateUrl: "app.component.html"
 })
 export class AppComponent implements OnInit {
-  public view: Observable<GridDataResult>;
+  public view: GridDataResult;
   public sort: Array<SortDescriptor> = [];
   public pageSize = 10;
   public skip = 0;
@@ -28,11 +29,11 @@ export class AppComponent implements OnInit {
 
   @ViewChild(GridComponent) grid: GridComponent;
 
-  constructor(private service: CategoriesService) {}
+  constructor(private service: CategoriesService) { }
 
   public ngOnInit(): void {
     // Bind directly to the service as it is a Subject
-    this.view = this.service;
+    this.loadProducts();
 
     // Fetch the data with the initial state
     this.loadData();
@@ -45,7 +46,8 @@ export class AppComponent implements OnInit {
     this.sort = sort;
 
     // Reload the data with the new state
-    this.loadData();
+    //this.loadData();
+    this.sortChange(sort);
 
     // Expand the first row initially
     this.grid.expandRow(0);
@@ -57,6 +59,19 @@ export class AppComponent implements OnInit {
       take: this.pageSize,
       sort: this.sort
     });
+  }
+
+  public sortChange(sort: SortDescriptor[]): void {
+    this.sort = sort;
+    this.loadProducts();
+  }
+
+  private loadProducts(): void {
+    console.log('load products with sort:'+this.sort);
+    this.view = {
+      data: orderBy(Data, this.sort),
+      total: 682
+    };
   }
 
   public getEyeColor(data): string {
@@ -93,11 +108,11 @@ export class AppComponent implements OnInit {
     if (data.last_protocol?.result != undefined) {
       if (data.last_protocol.result == 0) {
         let tempDate = new Date(data.last_protocol?.protocol_date_next);
-        result =this.generateTimestamp(tempDate);
+        result = this.generateTimestamp(tempDate);
       }
       if (data.last_protocol.result == 1) {
         let tempDate = new Date(data.last_protocol?.protocol_date_next);
-        result =this.generateTimestamp(tempDate);
+        result = this.generateTimestamp(tempDate);
       }
       if (data.last_protocol.result == 3) {
         result = 'unauffindbar';
@@ -107,33 +122,33 @@ export class AppComponent implements OnInit {
       }
       if (data.last_protocol.result == 5) {
         let tempDate = new Date(data.last_protocol?.protocol_date_next);
-        result =this.generateTimestamp(tempDate);
+        result = this.generateTimestamp(tempDate);
       }
       const currentDate = new Date();
       const nextDate = new Date(data.last_protocol?.protocol_date_next);
       if (nextDate.getTime() != NaN && currentDate > nextDate) {
-        
+
         let tempDate = new Date(data.last_protocol?.protocol_date_next);
-        result =this.generateTimestamp(tempDate);
+        result = this.generateTimestamp(tempDate);
       }
-    } else {      
-        let tempDate = new Date(data.last_protocol?.protocol_date_next);
-        result =this.generateTimestamp(tempDate);
+    } else {
+      let tempDate = new Date(data.last_protocol?.protocol_date_next);
+      result = this.generateTimestamp(tempDate);
     }
     return result;
   }
 
-  private generateTimestamp(date:Date):string{
+  private generateTimestamp(date: Date): string {
     let result =
-            String(date.getDate()).padStart(2, '0') +
-            '.' +
-            String(date.getMonth() + 1).padStart(2, '0') +
-            '.' +
-            date.getFullYear();
+      String(date.getDate()).padStart(2, '0') +
+      '.' +
+      String(date.getMonth() + 1).padStart(2, '0') +
+      '.' +
+      date.getFullYear();
     return result;
   }
 
   public showOnlyBeveragesDetails(dataItem: any, index: number): boolean {
-        return dataItem?.children && dataItem?.children.length > 0;
-    }
+    return dataItem?.children && dataItem?.children.length > 0;
+  }
 }
