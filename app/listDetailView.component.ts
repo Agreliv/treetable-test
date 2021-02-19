@@ -9,22 +9,23 @@ import {
 
 import { SortDescriptor } from "@progress/kendo-data-query";
 
-import { CategoriesService } from "./../northwind.service";
+import { CategoriesService } from "./northwind.service";
 
 @Component({
   providers: [CategoriesService],
   selector: "list-detail-view-app",
-  templateUrl: "listDetailView.Component.html"
+  templateUrl: "listDetailView.component.html"
 })
 export class ListDetailViewComponent implements OnInit {
   public sort: Array<SortDescriptor> = [];
   public pageSize = 10;
   public skip = 0;
+  public view: GridDataResult;
 
   /**
      * The category for which details are displayed
      */
-    @Input() public view: any;
+    @Input() public parent: any;
 
   // For Angular 8
   // @ViewChild(GridComponent, { static: true })
@@ -36,7 +37,8 @@ export class ListDetailViewComponent implements OnInit {
 
   public ngOnInit(): void {
     // Fetch the data with the initial state
-    console.log(this.view);
+    this.view = {data:this.parent.children, total:this.parent.children.length}
+    console.log(this.parent);
   }
 
   public getEyeColor(data): string {

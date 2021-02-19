@@ -42,7 +42,7 @@
 	</kendo-grid-column>
 	<kendo-grid-column field="check_interval" title="Intervall prüfen"></kendo-grid-column>
 	<ng-template kendoGridDetailTemplate let-dataItem [kendoGridDetailTemplateShowIf]="showOnlyBeveragesDetails">
-		<category-details [category]="dataItem">
-		</category-details>
+		<list-detail-view-app [parent]="dataItem">
+		</list-detail-view-app>
 	</ng-template>
 </kendo-grid>

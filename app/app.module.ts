@@ -1,14 +1,14 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { HttpClientModule } from "@angular/common/http";
 
-import { GridModule } from '@progress/kendo-angular-grid';
+import { GridModule } from "@progress/kendo-angular-grid";
 
-import { AppComponent } from './app.component';
+import { AppComponent } from "./app.component";
 
-import { CategoryDetailComponent } from './category-details.component';
-import { ListDetailViewComponent } from './list-detail-view/listDetailView.component';
+import { CategoryDetailComponent } from "./category-details.component";
+import { ListDetailViewComponent } from "./listDetailView.component";
 
 @NgModule({
   imports: [
@@ -22,8 +22,6 @@ import { ListDetailViewComponent } from './list-detail-view/listDetailView.compo
     CategoryDetailComponent,
     ListDetailViewComponent
   ],
-  bootstrap: [
-    AppComponent
-  ]
+  bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
